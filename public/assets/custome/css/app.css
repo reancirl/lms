@@ -1,0 +1,19 @@
+.login-page{
+    background-image: url('../images/logo_bckgrnd.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+}   
+.login-card{
+    background-color: #ffffff42!important;
+}
+.login-card-body{
+    background-color: #ffffff42!important;
+}
+.login-box-msg{
+    color:black;
+    font-weight: bold;
+}
+.forget_pass{
+    color:rgb(39, 39, 253);
+}
