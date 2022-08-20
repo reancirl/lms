@@ -61,14 +61,21 @@
                 <li class="nav-item">
                     <a href="" class="nav-link text-left">
                         <i class="nav-icon fas fa-clock"></i>
-                        <p>Hours</p>
+                        <p>Time</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="" class="nav-link text-left">
                         <i class="nav-icon fas fa-school"></i>
-                        <p>Classes</p>
+                        <p>Courses</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="" class="nav-link text-left">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>Archived Courses</p>
                     </a>
                 </li>
                 
