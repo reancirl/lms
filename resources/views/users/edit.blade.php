@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content">
-        <h1>Create User</h1>
+        <h1>Edit User</h1>
         <div class="alert alert-warning">
             Default user password is the ID Number!
         </div>
@@ -88,7 +88,7 @@
                     <input type="number" class="form-control" name="year_level" max="12" value="{{ $user->year_level }}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
         </form>        
     </section>
 @endsection

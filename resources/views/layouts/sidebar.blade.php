@@ -38,35 +38,35 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('subjects.index') }}" class="nav-link text-left {{Request::is('subjects*')? 'active': ''}}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>Subjects</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('school-years.index') }}" class="nav-link text-left {{Request::is('school-years*')? 'active': ''}}">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>School Year</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('semester.index') }}" class="nav-link text-left {{Request::is('semester*')? 'active': ''}}">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>Semester</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('time.index') }}" class="nav-link text-left {{Request::is('time*')? 'active': ''}}">
                         <i class="nav-icon fas fa-clock"></i>
                         <p>Time</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('courses.index') }}" class="nav-link text-left {{Request::is('courses*')? 'active': ''}}">
                         <i class="nav-icon fas fa-school"></i>
                         <p>Courses</p>
                     </a>

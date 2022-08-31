@@ -7,79 +7,43 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $subjects = Subject::get();
+        return view('subjects.index',compact('subjects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('subjects.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $subject = new Subject;
+        $subject->fill($request->except('status'));
+        $subject->status = $request->status == 'true' ? true : false;
+        $subject->save();
+        return redirect('subjects')->with('success','Sucessfully created subject!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
     public function show(Subject $subject)
     {
-        //
+        $subject->delete();
+        return redirect('subjects')->with('success','Sucessfully deleted subject!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Subject $subject)
     {
-        //
+        return view('subjects.edit',compact('subject'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Subject $subject)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subject $subject)
-    {
-        //
+        $subject->fill($request->except('status'));
+        $subject->status = $request->status == 'true' ? true : false;
+        $subject->update();
+        return redirect('subjects')->with('success','Sucessfully updated subject!');
     }
 }
