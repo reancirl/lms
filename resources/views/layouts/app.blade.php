@@ -65,6 +65,21 @@
 
                 <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>                   
+                    @endif
+                    @if(session()->has('warning'))
+                        <div class="alert alert-warning">
+                            {{ session()->get('warning') }}
+                        </div>                   
+                    @endif
+                    @if(session()->has('error'))
+                        <div class="alert alert-error">
+                            {{ session()->get('error') }}
+                        </div>                   
+                    @endif
                     @yield('content')
                 </div>
                 <!-- /.content-wrapper -->
@@ -135,6 +150,11 @@
 
     {{-- Custome JS --}}
     <script src="{{asset('assets/custome/js/modal-multiple-popup.js')}}"></script>
+    <script>
+        $('.alert').click(function(e) {
+            $(this).hide();
+        })
+    </script>
     @yield('js')
 </body>
 </html>

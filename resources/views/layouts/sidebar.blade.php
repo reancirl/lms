@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link text-left">
+                    <a href="{{ route('users.index') }}" class="nav-link text-left {{Request::is('users*')? 'active': ''}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Users</p>
                     </a>
