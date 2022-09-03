@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('times', function (Blueprint $table) {
             $table->id();
-            $table->date('start');
-            $table->date('end');
+            $table->string('start');
+            $table->string('end');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

@@ -7,79 +7,40 @@ use Illuminate\Http\Request;
 
 class TimeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $time = Time::get();
+        return view('time.index',compact('time'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('time.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $time = new Time;
+        $time->start = $request->start_hour. ':' .$request->start_minute. ' ' .$request->start_am_pm;
+        $time->end = $request->end_hour. ':' .$request->end_minute. ' ' .$request->end_am_pm;
+        $time->status = true;
+        $time->save();
+        return redirect('time')->with('success','Sucessfully created time schedule!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
     public function show(Time $time)
     {
-        //
+        $time->delete();
+        return redirect('time')->with('success','Sucessfully deleted time schedule!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Time $time)
     {
-        //
+        return view('time.edit',compact('time'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Time $time)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Time $time)
-    {
-        //
+       
     }
 }
