@@ -9,6 +9,10 @@
 
             <div class="row mb-3">
                 <div class="col">
+                    <label for="name">Name <span class="text-red">*</span> </label>
+                    <input type="text" class="form-control" name="name" placeholder="First/Second/Third/Summer" value="{{ $semester->name }}">
+                </div>
+                <div class="col">
                     <label for="school_year_id">School Year <span class="text-red">*</span> </label>
                     <select name="school_year_id" id="school_year_id" class="form-control" required>
                         <option value="">-- Select Start Year --</option>
@@ -17,6 +21,8 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="type">Type <span class="text-red">*</span> </label>
                     <select name="type" id="type" class="form-control">

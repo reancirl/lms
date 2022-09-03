@@ -40,8 +40,8 @@
                     <label for="role">Role <span class="text-red">*</span> </label>
                     <select name="role" id="role" class="form-control" required>
                         <option value="student">Student</option>
-                        <option value="Teacher">Teacher</option>
-                        <option value="Admin">Admin</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
                     </select>
                 </div>
                 <div class="col">

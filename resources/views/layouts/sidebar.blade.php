@@ -72,12 +72,12 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="" class="nav-link text-left">
                         <i class="nav-icon fas fa-history"></i>
                         <p>Archived Courses</p>
                     </a>
-                </li>
+                </li> --}}
                 
                 <li class="nav-item">
                     <a class="nav-link text-left" href="{{ route('logout') }}"

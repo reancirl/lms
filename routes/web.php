@@ -26,5 +26,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('school-years','App\Http\Controllers\SchoolYearController');
     Route::resource('semester','App\Http\Controllers\SemesterController');
     Route::resource('time','App\Http\Controllers\TimeController');
-    Route::resource('courses','App\Http\Controllers\CoursesController');
+    Route::resource('courses','App\Http\Controllers\CourseController');
 });
