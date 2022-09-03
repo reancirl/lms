@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>School Year</th>
                     <th>Type</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -18,7 +18,7 @@
                 @foreach ($semester as $i => $data)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $data->name ?? '' }}</td>
+                        <td>{{ $data->school_year->start }} - {{ $data->school_year->end }}</td>
                         <td>{{ $data->type ?? '' }}</td>
                         <td>{{ $data->status ? 'Active' : 'Inactive' }}</td>
                         <td>
