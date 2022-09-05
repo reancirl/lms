@@ -28,7 +28,7 @@
                         <td>{{ $data->time ? $data->time->start.'-'.$data->time->end : '' }}</td>
                         <td>{{ $data->status ? 'Active' : 'Inactive' }}</td>
                         <td>
-                            <a href="" class="btn btn-primary btn-sm">Add Student</a>
+                            <a href="{{ route('course-students.index') }}?course_id={{ $data->id }}" class="btn btn-primary btn-sm">View Student</a>
                             <a href="{{ route('courses.edit',$data->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{ route('courses.show',$data->id) }}" class="btn btn-danger btn-sm">Delete</a>
                         </td>

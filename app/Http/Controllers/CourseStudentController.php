@@ -3,81 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\CourseStudent;
+use App\Models\User;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseStudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $course = Course::find($request->course_id);
+        $students_id = CourseStudent::where('course_id',$course->id)->pluck('student_id');
+        $students = CourseStudent::where('course_id',$course->id)->get();
+        $enrolees = User::where('role','student')->whereNotIn('id',$students_id)->get();
+        return view('courseStudents.index',compact('course','students','enrolees','request'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = new CourseStudent;
+        $data->course_id = $request->course_id;
+        $data->student_id = $request->student_id;
+        $data->save();
+
+        return redirect()->back()->with('success','Student added!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CourseStudent  $courseStudent
-     * @return \Illuminate\Http\Response
-     */
     public function show(CourseStudent $courseStudent)
     {
-        //
+        $courseStudent->delete();
+        return redirect()->back()->with('success','Student deleted!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CourseStudent  $courseStudent
-     * @return \Illuminate\Http\Response
-     */
     public function edit(CourseStudent $courseStudent)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CourseStudent  $courseStudent
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, CourseStudent $courseStudent)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CourseStudent  $courseStudent
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(CourseStudent $courseStudent)
     {
         //
