@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('author_id');
+            $table->longtext('content');
             $table->boolean('status')->default(false);
             $table->datetime('deadline')->nullable();
             $table->string('priority')->boolean('normal');

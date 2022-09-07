@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CourseStudent;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CourseStudentController extends Controller
@@ -52,5 +53,22 @@ class CourseStudentController extends Controller
     public function destroy(CourseStudent $courseStudent)
     {
         //
+    }
+
+    public function grade(Request $request, $id) 
+    {
+        foreach ($request->student_id as $i => $student_id) {
+            $cs = CourseStudent::where('student_id',$student_id)->where('course_id',$id)->first();
+            $cs->final_grade = $request->final_grade[$i];
+            $cs->save();
+        }
+        return redirect()->back()->with('success','Student graded successfully!');
+    }
+
+    public function course($id)
+    {
+        $course = Course::find($id);
+        $posts = Post::where('course_id',$id)->where('status',true)->orderBy('created_at','desc')->get();
+        return view('courseStudents.course',compact('course','posts'));
     }
 }

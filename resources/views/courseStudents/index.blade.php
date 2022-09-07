@@ -22,31 +22,43 @@
                 </div>
             </div>
         </form>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Grade</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($students as $i => $data)
+        <form action="{{ route('course-students.grade',$request->course_id) }}" method="POST">
+            @csrf
+            @method('PATCH')
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ ++$i }}</td>
-                        <td>
-                            <b>{{ ucFirst($data->student->last_name) }}</b>, {{ ucFirst($data->student->first_name) }} {{ ucFirst($data->student->middle_name) }}
-                        </td>
-                        <td>
-                            {{ $data->grade ?? '' }}
-                        </td>
-                        <td>
-                            <a href="{{ route('course-students.show',$data->id) }}" class="btn btn-danger btn-sm">Remove</a>
-                        </td>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($students as $i => $data)
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>
+                                <b>{{ ucFirst($data->student->last_name) }}</b>, {{ ucFirst($data->student->first_name) }} {{ ucFirst($data->student->middle_name) }}
+                            </td>
+                            <td width="30%">
+                                @if (auth()->user()->role == 'teacher')
+                                    <input type="hidden" class="form-control" name="student_id[{{$i}}]" value="{{ $data->student_id }}">
+                                    <input type="text" class="form-control" name="final_grade[{{$i}}]" value="{{ $data->final_grade }}">
+                                @else
+                                    {{ $data->final_grade ?? '' }}
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('course-students.show',$data->id) }}" class="btn btn-danger btn-sm">Remove</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if (auth()->user()->role == 'teacher')
+                <button class="btn btn-primary btn-block mt-5">Save Grades</button>
+            @endif
+        </form>
     </section>
 @endsection

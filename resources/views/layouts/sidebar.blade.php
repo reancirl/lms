@@ -14,7 +14,7 @@
                 {{-- <img src="{{asset('public/assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image"> --}}
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ ucWords(auth()->user()->name) ?? 'N/a' }}</a>
+                <a href="#" class="d-block">{{ ucWords(auth()->user()->last_name) ?? 'N/a' }}, {{ ucWords(auth()->user()->first_name) ?? 'N/a' }} </a>
             </div>
         </div>
 
@@ -30,55 +30,83 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}" class="nav-link text-left {{Request::is('users*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Users</p>
-                    </a>
-                </li>
+                @if(auth()->user()->role == 'admin')
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}" class="nav-link text-left {{Request::is('users*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('subjects.index') }}" class="nav-link text-left {{Request::is('subjects*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>Subjects</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('subjects.index') }}" class="nav-link text-left {{Request::is('subjects*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Subjects</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('school-years.index') }}" class="nav-link text-left {{Request::is('school-years*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-calendar"></i>
-                        <p>School Year</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('school-years.index') }}" class="nav-link text-left {{Request::is('school-years*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-calendar"></i>
+                            <p>School Year</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('semester.index') }}" class="nav-link text-left {{Request::is('semester*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-graduation-cap"></i>
-                        <p>Semester</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('semester.index') }}" class="nav-link text-left {{Request::is('semester*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-graduation-cap"></i>
+                            <p>Semester</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('time.index') }}" class="nav-link text-left {{Request::is('time*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-clock"></i>
-                        <p>Time</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('time.index') }}" class="nav-link text-left {{Request::is('time*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-clock"></i>
+                            <p>Time</p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('courses.index') }}" class="nav-link text-left {{Request::is('courses*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-school"></i>
-                        <p>Courses</p>
-                    </a>
-                </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('courses.index') }}" class="nav-link text-left {{Request::is('courses*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-school"></i>
+                            <p>Courses</p>
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->role == 'teacher')
+                    <li class="nav-item">
+                        <a href="{{ route('courses.index') }}" class="nav-link text-left {{Request::is('courses*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-school"></i>
+                            <p>Courses</p>
+                        </a>
+                    </li>
+                @endif
                 {{-- <li class="nav-item">
                     <a href="" class="nav-link text-left">
                         <i class="nav-icon fas fa-history"></i>
                         <p>Archived Courses</p>
                     </a>
-                </li> --}}
-                
+                </li> --}}                
+                @if(auth()->user()->role != 'admin')
+                    @php
+                        if (auth()->user()->role == 'teacher') {
+                            $courses = \DB::table('courses');
+                            $courses = $courses->where('teacher_id',auth()->user()->id)->get();
+                        } else {
+                            $courses = \DB::table('courses');
+                            $courses = $courses->join('course_students as cs','cs.course_id','courses.id')->where('cs.student_id',auth()->user()->id)->select('courses.id','courses.name')->get();
+                        }
+                    @endphp
+
+                    @foreach($courses as $i => $data)
+                        <li class="nav-item">
+                            <a href="{{ route('course-students.course',$data->id) }}" class="nav-link text-left {{Request::is('course/'.$data->id)? 'active': ''}}">
+                                <i class="nav-icon fas fa-greater-than"></i>
+                                <p>{{ $data->name ?? 'N/a' }}</p>
+                            </a>
+                        </li>
+                    @endforeach
+                @endif
                 <li class="nav-item">
                     <a class="nav-link text-left" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
