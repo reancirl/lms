@@ -30,5 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('course-students','App\Http\Controllers\CourseStudentController');
     Route::patch('/course-students/grades/{id}',[App\Http\Controllers\CourseStudentController::class, 'grade'])->name('course-students.grade');
     Route::get('/course/{id}',[App\Http\Controllers\CourseStudentController::class, 'course'])->name('course-students.course');
+    Route::get('/course/{id}/{post_id}',[App\Http\Controllers\PostController::class, 'index']);
     Route::resource('posts','App\Http\Controllers\PostController');
+    Route::resource('response','App\Http\Controllers\ResponseController');
 });

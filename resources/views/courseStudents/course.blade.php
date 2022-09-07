@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content">
+    <section class="content pt-3">
         <h1>{{ $course->name }} ({{ $course->subject->name }})</h1>
-        @csrf
         <hr>
         @foreach ($posts as $data)
             <div class="row mb-4 p-3 mx-2" style="background-color:rgb(244, 244, 244);border: 1px solid;box-shadow: 5px 5px #888888;">
@@ -17,9 +16,9 @@
                     @elseif($data->priority == 'Low')
                         <strong class="text-success">!! {{ $data->priority }} Priority | Deadline: {{ date('M d, Y', strtotime($data->deadline)) }} !!</strong>
                     @endif
-                    <h4>{{ $data->content ?? 'N/a' }}</h4>
-                    <span>Date posted: {{ date('M d, Y', strtotime($data->created_at)) }}</span> | <span class="text-success">5 Responses</span> 
-                    <a href="{{ route('posts.index') }}?post_id={{$data->id}}" class="float-right">View Posts</a>
+                    <h4>{!! nl2br($data->content) !!}</h4>
+                    <span>Date posted: {{ date('M d, Y', strtotime($data->created_at)) }}</span>
+                    <a href="{{ url('/course/'.$course->id.'/'.$data->id) }}" class="float-right">View Posts</a>
                 </div>
             </div>
         @endforeach

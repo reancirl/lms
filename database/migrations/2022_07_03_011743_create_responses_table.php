@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_student_id');
+            $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('post_id');
             $table->string('status')->default('draft');
             $table->longtext('content');
             $table->timestamps();
 
-            $table->foreign('course_student_id')->references('id')->on('course_students')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }

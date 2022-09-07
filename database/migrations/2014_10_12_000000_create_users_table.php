@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('type')->nullable();
             $table->date('birthday')->nullable();
-            $table->string('gender');
-            $table->string('civil_status');
+            $table->string('gender')->nullable();
+            $table->string('civil_status')->nullable();
             $table->string('year_level')->nullable();
             $table->string('password');
             $table->timestamps();

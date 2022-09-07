@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Response;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index($course_id,$post_id)
     {
-        //
+        $post = Post::find($post_id);
+        $res = Response::where('post_id',$post->id)->orderBy('created_at','desc')->get();
+        return view('posts.index',compact('post','res'));
     }
 
     public function create()

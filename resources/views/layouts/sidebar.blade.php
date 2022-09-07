@@ -100,7 +100,7 @@
 
                     @foreach($courses as $i => $data)
                         <li class="nav-item">
-                            <a href="{{ route('course-students.course',$data->id) }}" class="nav-link text-left {{Request::is('course/'.$data->id)? 'active': ''}}">
+                            <a href="{{ route('course-students.course',$data->id) }}" class="nav-link text-left {{Request::is('course/'.$data->id.'/*')? 'active': ''}}">
                                 <i class="nav-icon fas fa-greater-than"></i>
                                 <p>{{ $data->name ?? 'N/a' }}</p>
                             </a>
