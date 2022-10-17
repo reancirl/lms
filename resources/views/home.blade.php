@@ -35,10 +35,11 @@
             </form> 
         @else
             <div class="jumbotron" style="border:2px solid #000">
-                <h1 class="display-4">{{ $blog->what ?? '' }}</h1>
-                <p class="lead">{{ $blog->where ?? '' }}</p>
+                <h1 class="display-4">What: {{ $blog->what ?? '' }}</h1>
+                <p class="lead">Where: {{ $blog->where ?? '' }}</p>
+                <p class="lead">When:{{ $blog->when ?? '' }}</p>
                 <hr class="my-4">
-                <p>{{ $blog->when ?? '' }}</p>
+                <p>{{ $blog->description ?? '' }}</p>
             </div>
         @endif 
     </section>

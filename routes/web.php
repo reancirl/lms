@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/settings', [App\Http\Controllers\UserController::class, 'account'])->name('account');
+    Route::get('/settings-password', [App\Http\Controllers\UserController::class, 'password'])->name('password');
+    Route::patch('/settings-password/{id}', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update-password');
     Route::resource('users','App\Http\Controllers\UserController');
     Route::resource('subjects','App\Http\Controllers\SubjectController');
     Route::resource('school-years','App\Http\Controllers\SchoolYearController');

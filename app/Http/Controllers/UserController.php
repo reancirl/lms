@@ -34,10 +34,30 @@ class UserController extends Controller
         $user->fill($request->except('password'));
         $user->password = bcrypt($request->id_number);
         $user->update();
-        return redirect('users')->with('success','Sucessfully updated user!');
+        return redirect()->back()->with('success','Sucessfully updated user!');
     }
     public function show(User $user) {
         $user->delete();
         return redirect('users')->with('success','Sucessfully deleted user!');
+    }
+    public function account(Request $request)
+    {
+        $user = auth()->user();
+        return view('account',compact('user'));
+    }
+    public function password()
+    {
+        return view('password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'password' => 'required|string|min:8|confirmed'
+        ]);
+        $user = auth()->user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->back()->with('success','Password updated!');
     }
 }

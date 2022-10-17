@@ -110,14 +110,16 @@
                         </li>
                     @endforeach
                 @endif
-
-                <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link text-left {{Request::is('setting*')? 'active': ''}}">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>Account Setting</p>
-                    </a>
-                </li>
-
+                
+                @if(auth()->user()->role != 'admin')
+                    <li class="nav-item">
+                        <a href="{{ route('account') }}" class="nav-link text-left {{Request::is('settings*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>Account Setting</p>
+                        </a>
+                    </li>
+                @endif
+                
                 <li class="nav-item">
                     <a class="nav-link text-left" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
