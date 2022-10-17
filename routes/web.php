@@ -33,4 +33,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/course/{id}/{post_id}',[App\Http\Controllers\PostController::class, 'index']);
     Route::resource('posts','App\Http\Controllers\PostController');
     Route::resource('response','App\Http\Controllers\ResponseController');
+    Route::resource('blog','App\Http\Controllers\BlogController');
 });

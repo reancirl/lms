@@ -15,6 +15,9 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ ucWords(auth()->user()->last_name) ?? 'N/a' }}, {{ ucWords(auth()->user()->first_name) ?? 'N/a' }} </a>
+                @if(auth()->user()->role != 'admin')
+                    <strong class="text-white">{{ auth()->user()->id_number ?? 'N/a' }}</strong>
+                @endif
             </div>
         </div>
 
@@ -29,7 +32,7 @@
                         <p>Home</p>
                     </a>
                 </li>
-
+                
                 @if(auth()->user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link text-left {{Request::is('users*')? 'active': ''}}">
@@ -107,6 +110,14 @@
                         </li>
                     @endforeach
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link text-left {{Request::is('setting*')? 'active': ''}}">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Account Setting</p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link text-left" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

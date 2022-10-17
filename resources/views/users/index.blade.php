@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ ++$i }}</td>
                         <td>{{ $data->id_number }}</td>
-                        <td>{{ $data->last_name }}, {{ $data->first_name }} {{ $data->last_name }}</td>
+                        <td>{{ $data->last_name }}, {{ $data->first_name }} {{ $data->middle_name }}</td>
                         <td>{{ $data->role }}</td>
                         <td>{{ $data->email }}</td>
                         <td>
