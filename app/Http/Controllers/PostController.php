@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -31,6 +32,14 @@ class PostController extends Controller
         $post->priority = $request->priority ?? 'Normal';
         $post->overall_score = $request->overall_score;
         $post->type = $request->type ?? 'general';
+
+        if($request->file) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('', $fileName, 'public');
+            $post->file_name = time().'_'.$request->file->getClientOriginalName();
+            $post->file_path = '/storage/' . $filePath;
+        }
+
         $post->save();
         return redirect()->back()->with('success','Post created!');
     }
@@ -54,5 +63,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function download(Request $request)
+    {
+        return Storage::disk('public')->download($request->path);
     }
 }

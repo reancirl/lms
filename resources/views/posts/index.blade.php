@@ -7,6 +7,10 @@
         <p class="pb-0 mb-0">Date Posted: {{ date('M d, Y', strtotime($post->created_at)) }}</p>
         <p class="pb-0 mb-0">Deadline: {{ date('M d, Y', strtotime($post->deadline)) }}</p>
         <p class="pb-0 mb-0">{{ $post->priority }} Priority</p>
+        @if($post->file_name)
+            Download file:
+            <a href="{{ route('download') }}?path={{ $post->file_name }}" target="_blank">{{ $post->file_name ?? '' }}</a>
+        @endif
         <hr>
         @foreach($res as $i => $data)
             <div class="row">

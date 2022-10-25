@@ -22,8 +22,9 @@
                 </div>
             </div>
         @endforeach
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="file" name="file" id="file" class="">
             <div class="row mb-2">
                 <div class="col-sm-10">
                     <input type="hidden" name="course_id" value="{{ $course->id }}">
