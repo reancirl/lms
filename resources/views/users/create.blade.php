@@ -33,6 +33,15 @@
                     <label for="id_number">ID Number <span class="text-red">*</span> </label>
                     <input type="text" name="id_number" id="id_number" class="form-control" required>
                 </div>
+                <div class="col">
+                    <label for="id_number">Department <span class="text-red">*</span> </label>
+                    <select name="department_id" required class="form-control">
+                        <option value="">-- Select Department --</option>
+                        @foreach ($department as $item)
+                            <option value="{{ $item->id }}">{{ $item->name ?? '' }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="row mb-3">

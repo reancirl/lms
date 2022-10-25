@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Department;
 use App\Models\User;
 
 class UserController extends Controller
@@ -14,7 +15,8 @@ class UserController extends Controller
     }
     public function create()
     {
-        return view('users.create');
+        $department = Department::get();
+        return view('users.create',compact('department'));
     }
     public function store(Request $request)
     {

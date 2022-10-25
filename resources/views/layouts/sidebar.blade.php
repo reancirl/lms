@@ -75,6 +75,13 @@
                             <p>Courses</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('department.index') }}" class="nav-link text-left {{Request::is('department*')? 'active': ''}}">
+                            <i class="nav-icon fas fa-greater-than"></i>
+                            <p>Department</p>
+                        </a>
+                    </li>
                 @endif
                 @if (auth()->user()->role == 'teacher')
                     <li class="nav-item">
