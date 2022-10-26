@@ -17,6 +17,10 @@
                 <div class="col-sm-11">
                     <p class="mb-1 text-primary">{{ ucWords($data->author->last_name) }}, {{ ucWords($data->author->first_name) }} on {{ date('M d, Y', strtotime($post->created_at)) }}</p>
                     <h4>{!! nl2br($data->content) !!}</h4>
+                    @if($data->file_name)
+                        File attached:
+                        <a href="{{ route('download') }}?path={{ $data->file_name }}" target="_blank">{{ $data->file_name ?? '' }}</a>
+                    @endif
                     <hr>
                 </div>
                 <div class="col-sm-1">
@@ -28,8 +32,9 @@
         @endforeach
         <div class="row">
             <div class="col-sm-10">
-                <form action="{{ route('response.store') }}" method="POST">
+                <form action="{{ route('response.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="file" name="file" id="file" class="">
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
                     <textarea name="content" id="" class="form-control" cols="20" rows="5" placeholder="Write response here" required></textarea>
                     {{-- <button class="btn btn-secondary mt-2" type="submit" name="status" value="draft">Save as Draft</button> --}}

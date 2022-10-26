@@ -24,6 +24,12 @@ class ResponseController extends Controller
         $res->author_id = auth()->user()->id;
         $res->content = $request->content;
         $res->status = 'saved';
+        if($request->file) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('', $fileName, 'public');
+            $res->file_name = time().'_'.$request->file->getClientOriginalName();
+            $res->file_path = '/storage/' . $filePath;
+        }
         $res->save();
 
         return redirect()->back()->with('success','Response save!');
